@@ -6,6 +6,8 @@ import { db } from '../../utils';
 import AppLoader from '../Loaders/AppLoader';
 import Component from './Component';
 
+import { addQuestionActions } from '../../modules/addQuestion';
+import { asyncQuestion } from '../../modules/addQuestion/actions';
 
 const LIMIT = 10;
 
@@ -21,15 +23,19 @@ const DIRECTION = {
 
 const sortWith = sortBy => R.sortWith([DIRECTION[sortBy](R.prop(sortBy))]);
 
-const prepareQuestions = ({ questions, search, limit, sortBy }) => R.compose(
-  R.take(limit),
-  sortWith(sortBy),
-  filterByTitle(search.replace(/[\\[\]<>+{}]/g, '')),
-)(questions);
+const prepareQuestions = ({ questions, search, limit, sortBy, dispatch }) => {
+  dispatch(addQuestionActions.asyncQuestion());
+  return R.compose(
+    R.take(limit),
+    sortWith(sortBy),
+    filterByTitle(search.replace(/[\\[\]<>+{}]/g, '')),
+  )(questions);
+}
 
 const mapStateToProps = state => ({
   search: state.search,
   sortBy: state.sort,
+  //isLoad: state.addQuestion
 });
 
 const enhance = compose(
