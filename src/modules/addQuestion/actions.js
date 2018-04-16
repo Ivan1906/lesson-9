@@ -12,9 +12,8 @@ const receiveQuestion = () => ({
 
 const fetchData = () => dispatch => {
     dispatch(requestQuestion());
-    setTimeout(() => {
-        return dispatch(receiveQuestion());
-    }, 500);
+    return fetch('http://localhost:3000/posts')
+        .then(request => dispatch(receiveQuestion()));
 }
 
 const asyncQuestion = () => (dispatch) => {

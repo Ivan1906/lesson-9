@@ -35,7 +35,6 @@ const prepareQuestions = ({ questions, search, limit, sortBy, dispatch }) => {
 const mapStateToProps = state => ({
   search: state.search,
   sortBy: state.sort,
-  //isLoad: state.addQuestion
 });
 
 const enhance = compose(

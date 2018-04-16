@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Button from "../Buttons/Button/index";
 import QuestionItem from "../QuestionItem/Component";
 import StyledHeader from '../Common/StyledHeader';
-import AppLoader from '../Loaders/AppLoader'
 
 const List = styled.ul`
   list-style: none;
@@ -11,11 +10,7 @@ const List = styled.ul`
   padding: 0;
 `;
 
-const QuestionList = ({ questions, onIncreaseLimit, isLoad, answerSort, sortBy }) =>{ 
-  console.log(isLoad);
-  console.log(answerSort);
-  console.log(sortBy);
-  return(
+const QuestionList = ({ questions, onIncreaseLimit }) => (
   <React.Fragment>
     <StyledHeader>Users ask: ({questions.length})</StyledHeader>
 
@@ -28,11 +23,9 @@ const QuestionList = ({ questions, onIncreaseLimit, isLoad, answerSort, sortBy }
         )
       }
     </List>
-      {false ? 
-        (<AppLoader/>) : 
-        (<Button onClick={onIncreaseLimit}>More</Button>)
-      }
+
+    <Button onClick={onIncreaseLimit}>More</Button>
   </React.Fragment>
-);}
+);
 
 export default QuestionList;
